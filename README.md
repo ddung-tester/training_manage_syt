@@ -1,7 +1,40 @@
 # Hệ thống Quản lý Trung tâm Đào tạo
 
-Ứng dụng web full-stack quản lý trung tâm đào tạo với React + Vite + Tailwind CSS (Frontend) và Node.js + Express + PostgreSQL (Backend).
 
+# Training Management System
+
+## Overview
+Training Management System là hệ thống quản lý đào tạo, hỗ trợ quản lý học viên, giảng viên, khóa học, lớp học và kết quả học tập. Dự án mô phỏng quy trình phân tích nghiệp vụ và thiết kế hệ thống từ góc nhìn Business Analyst.
+
+## My Role – Business Analyst
+- Phân tích yêu cầu và xác định stakeholder, business rules.<br>
+- Xây dựng luồng nghiệp vụ cho quản lý khóa học, đăng ký lớp, nhập điểm.<br>
+- Viết tài liệu BRD/SRS (rút gọn).<br>
+- Thiết kế mô hình dữ liệu (ERD), xác định quan hệ và ràng buộc.<br>
+- Viết user story và acceptance criteria.<br>
+- Kiểm tra logic hệ thống bằng SQL.
+
+## Business Scope
+- Quản lý học viên và giảng viên<br>
+- Quản lý khóa học và lớp học<br>
+- Đăng ký lớp học<br>
+- Phân công giảng viên<br>
+- Quản lý và theo dõi điểm
+
+## Key Business Rules
+- Học viên không được đăng ký lớp trùng thời gian.<br>
+- Mỗi lớp có giới hạn số lượng học viên.<br>
+- Chỉ giảng viên được phân công mới được nhập điểm.<br>
+- Điểm hợp lệ trong khoảng 0–10.
+
+## Core Entities
+Student, Instructor, Course, Class, Enrollment, Grade.
+
+## Tech Stack
+PostgreSQL, SQL, pgAdmin.
+
+
+Ứng dụng web full-stack quản lý trung tâm đào tạo với React + Vite + Tailwind CSS (Frontend) và Node.js + Express + PostgreSQL (Backend).
 ## Công nghệ sử dụng
 
 ### Frontend
