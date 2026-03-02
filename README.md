@@ -4,31 +4,135 @@
 # Training Management System
 
 ## Overview
-Training Management System là hệ thống quản lý đào tạo, hỗ trợ quản lý học viên, giảng viên, khóa học, lớp học và kết quả học tập. Dự án mô phỏng quy trình phân tích nghiệp vụ và thiết kế hệ thống từ góc nhìn Business Analyst.
+Training Management System là hệ thống quản lý hoạt động đào tạo cho một trung tâm. Hệ thống hỗ trợ quản lý học viên, giảng viên, khóa học, lớp học, đăng ký và kết quả học tập.  
+Dự án được xây dựng với mục tiêu mô phỏng quy trình phân tích nghiệp vụ và thiết kế hệ thống từ góc nhìn Business Analyst.
 
-## My Role – Business Analyst
-- Phân tích yêu cầu và xác định stakeholder, business rules.<br>
-- Xây dựng luồng nghiệp vụ cho quản lý khóa học, đăng ký lớp, nhập điểm.<br>
-- Viết tài liệu BRD/SRS (rút gọn).<br>
-- Thiết kế mô hình dữ liệu (ERD), xác định quan hệ và ràng buộc.<br>
-- Viết user story và acceptance criteria.<br>
-- Kiểm tra logic hệ thống bằng SQL.
+---
+
+## My Role – Business Analyst (End-to-End)
+
+- Thu thập và phân tích yêu cầu nghiệp vụ.
+- Xác định stakeholder và phạm vi hệ thống.
+- Phân tích quy trình hiện tại (AS-IS) và đề xuất quy trình cải tiến (TO-BE).
+- Xây dựng tài liệu BRD và SRS (bản rút gọn).
+- Viết Use Case, User Story và Acceptance Criteria.
+- Thiết kế mô hình dữ liệu (ERD) dựa trên nghiệp vụ.
+- Xác định business rules và ràng buộc hệ thống.
+- Hỗ trợ kiểm thử logic hệ thống bằng SQL.
+- Đảm bảo traceability giữa yêu cầu và thiết kế dữ liệu.
+
+---
 
 ## Business Scope
-- Quản lý học viên và giảng viên<br>
-- Quản lý khóa học và lớp học<br>
-- Đăng ký lớp học<br>
-- Phân công giảng viên<br>
-- Quản lý và theo dõi điểm
+
+Hệ thống bao gồm các module chính:
+
+### 1. User Management
+- Quản lý thông tin học viên
+- Quản lý thông tin giảng viên
+- Phân quyền theo vai trò
+
+### 2. Course & Class Management
+- Tạo và quản lý khóa học
+- Mở lớp theo kỳ học
+- Phân công giảng viên giảng dạy
+
+### 3. Enrollment Management
+- Học viên đăng ký lớp học
+- Kiểm tra điều kiện đăng ký
+- Theo dõi danh sách lớp
+
+### 4. Grade Management
+- Giảng viên nhập và cập nhật điểm
+- Lưu trữ kết quả học tập
+- Hỗ trợ tổng hợp báo cáo
+
+---
+
+## Sample Use Case – Course Registration
+
+**Actor:** Student  
+
+**Main Flow:**
+1. Student đăng nhập hệ thống  
+2. Xem danh sách lớp đang mở  
+3. Chọn lớp cần đăng ký  
+4. Hệ thống kiểm tra điều kiện (sĩ số, trùng lịch, điều kiện tiên quyết)  
+5. Đăng ký thành công và lưu vào hệ thống  
+
+**Alternative Flow:**
+- Nếu lớp đầy → hiển thị thông báo  
+- Nếu trùng lịch → không cho đăng ký  
+
+---
 
 ## Key Business Rules
-- Học viên không được đăng ký lớp trùng thời gian.<br>
-- Mỗi lớp có giới hạn số lượng học viên.<br>
-- Chỉ giảng viên được phân công mới được nhập điểm.<br>
-- Điểm hợp lệ trong khoảng 0–10.
 
-## Core Entities
-Student, Instructor, Course, Class, Enrollment, Grade.
+- Một học viên không thể đăng ký hai lớp trùng thời gian.
+- Mỗi lớp có giới hạn số lượng học viên.
+- Chỉ giảng viên được phân công mới có quyền nhập điểm.
+- Điểm hợp lệ trong khoảng từ 0 đến 10.
+- Học viên phải hoàn thành học phần tiên quyết (nếu có).
+
+---
+
+## Data Model (High-level)
+
+### Core Entities
+- Student  
+- Instructor  
+- Course  
+- Class  
+- Enrollment  
+- Grade  
+
+### Relationship Overview
+- Một Course có thể mở nhiều Class.
+- Student đăng ký Class thông qua Enrollment.
+- Instructor được phân công giảng dạy Class.
+- Grade gắn với Enrollment.
+
+Thiết kế dữ liệu đảm bảo:
+- Tính toàn vẹn (Primary Key, Foreign Key).
+- Giảm dư thừa dữ liệu.
+- Chuẩn hóa đến mức BCNF.
+
+---
+
+## Functional Requirements (Summary)
+
+- Admin có thể tạo/sửa/xóa khóa học.
+- Học viên có thể đăng ký lớp.
+- Giảng viên có thể nhập điểm.
+- Hệ thống kiểm tra điều kiện đăng ký tự động.
+- Người dùng có thể tra cứu thông tin lớp học.
+
+---
+
+## Non-Functional Requirements
+
+- Thời gian phản hồi < 3 giây.
+- Phân quyền rõ ràng theo vai trò.
+- Đảm bảo tính nhất quán và toàn vẹn dữ liệu.
+- Hệ thống có thể mở rộng thêm module trong tương lai.
+
+---
+
+## Tech Stack
+
+- PostgreSQL  
+- SQL  
+- pgAdmin  
+
+---
+
+## Learning Outcome
+
+- Hiểu quy trình phân tích yêu cầu trong phát triển phần mềm.
+- Thực hành chuyển đổi nghiệp vụ thành mô hình dữ liệu.
+- Rèn luyện kỹ năng viết tài liệu BA.
+- Làm quen với cách đảm bảo traceability trong dự án.
+
 
 ## Tech Stack
 PostgreSQL, SQL, pgAdmin.
